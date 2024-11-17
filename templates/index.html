@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+
+            <h1 class="text-center mb-4">Игра "Угадай число"</h1>
+
+            <div class="col-md-6">
+                <form action="/" method="post">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+
+                                <p class="guess">Введите число в диапазоне от  "{{ min_number }}" до  "{{ max_number }}"</p>
+
+                                <p>Отставшиеся попытки {{ attempts }} </p>
+
+                                {% if state == 1 %}
+                                <input type="number" class="form-control" name="user_guess" id="guess" placeholder="Ввод" autofocus/>
+                                {% else %}
+                                <input type="number" class="form-control" name="user_guess" id="guess" placeholder="Ввод" disabled/>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div id="history">
+                                {% for element in history %}
+                                <p>{{ element }}</p>
+                                {% endfor %}
+                            </div>
+
+
+                            <div class="d-flex justify-content-between">
+
+                                {% if state == 1 %}
+                                <button class="btn btn-primary" id="guessBtn">Угадать</button>
+                                <a href="/reset" class="btn btn-secondary" id="resetBtn">Начать заново</a>
+                                {% else %}
+                                <button class="btn btn-primary" id="guessBtn" disabled>Угадать</button>
+                                <a href="/reset" class="btn btn-secondary" id="resetBtn" autofocus>Начать заново</a>
+                                {% endif %}
+
+                            </div>
+
+                            <p class="mt-3" id="result"></p>
+                            <p class="mt-3" id="attempts"></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
